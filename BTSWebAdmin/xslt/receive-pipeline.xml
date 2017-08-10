@@ -1,0 +1,3645 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--remove back-slash \-->
+<Root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Stages>
+    <Stage CategoryId="9d0e4103-4cce-4536-83fa-4a5040674ad6">decoder</Stage>
+    <Stage CategoryId="9d0e4105-4cce-4536-83fa-4a5040674ad6">
+      <Components>
+        <Component Name="Microsoft.BizTalk.Component.XmlDasmComp">
+          <Properties>
+            <ValidateDocument vt="11">-1</ValidateDocument>
+          </Properties>
+        </Component>
+      </Components>
+    </Stage>
+    <Stage CategoryId="9d0e410d-4cce-4536-83fa-4a5040674ad6">validator</Stage>
+    <Stage CategoryId="9d0e410e-4cce-4536-83fa-4a5040674ad6">
+      <Components>
+        <Component Name="Microsoft.BizTalk.Component.PartyRes">
+          <Properties />
+        </Component>
+      </Components>
+    </Stage>
+  </Stages>
+  <CustomProps>
+    <AdapterConfig vt="8">
+      <Receive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <sqlCommand>EXEC edi_GetControlMessage</sqlCommand>
+        <connectionString>Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BizTalkMgmtDb;Data Source=BTS2016DEV</connectionString>
+        <documentRootElementName>ControlMessage</documentRootElementName>
+        <documentTargetNamespace>http://SQLControlMessage.IssueSelect</documentTargetNamespace>
+        <pollingUnitOfMeasure>Seconds</pollingUnitOfMeasure>
+        <pollingInterval>30</pollingInterval>
+        <uri>SQL://BTS2016DEV/BizTalkMgmtDb/</uri>
+        <pollWhileDataFound>False</pollWhileDataFound>
+      </Receive>
+    </AdapterConfig>
+  </CustomProps>
+
+</Root>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delete  /ReceiveLocations/{receivePortName}/{receiveLocationName}
+
+Delete Receive Location
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get  /ReceiveLocations/{receivePortName}/{receiveLocationName}
+
+Get receive location of a receive port
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put  /ReceiveLocations/{receiveLocationName}
+
+Update Receive Location
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put  /ReceiveLocations/SetPrimary/{receivePortName}/{receiveLocationName}
+
+Set primary receive location
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put  /ReceiveLocations/Enable/{receivePortName}/{receiveLocationName}
+
+Enable receive location
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put  /ReceiveLocations/Disable/{receivePortName}/{receiveLocationName}
+
+Disable receive location
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ReceivePorts
+Show/Hide
+List Operations
+Expand Operations
+
+
+get  /ReceivePorts
+
+Get Receive Ports
+
+
+
+
+Response Class (Status 200)
+
+
+OK
+
+
+
+Model
+Example Value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[
+{
+"Name": "string",
+"Description": "string",
+"IsTwoWay": true,
+"ApplicationName": "string",
+"CustomData": "string",
+"InboundTransforms": [
+"string"
+],
+"OutboundTransforms": [
+"string"
+],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": true,
+"AfterSendPipeline": true,
+"BeforeReceivePipeline": true,
+"AfterReceivePipeline": true
+},
+"Property": {
+"BeforeSendPipeline": true,
+"AfterSendPipeline": true,
+"BeforeReceivePipeline": true,
+"AfterReceivePipeline": true
+}
+},
+"ReceiveLocations": [
+"string"
+],
+"PrimaryReceiveLocation": "string"
+}
+]
+
+
+
+
+
+
+Response Content Type application/json text/json application/xml text/xml
+
+
+Hide Response
+
+Curl
+
+curl -X GET --header 'Accept: application/json' 'http://localhost/BizTalkManagementService/ReceivePorts'
+
+Request URL
+
+http://localhost/BizTalkManagementService/ReceivePorts
+
+Response Body
+
+[
+{
+"Name": "BatchControlMessageRecvPort",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "BizTalk EDI Application",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": true,
+"AfterReceivePipeline": true
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"BatchControlMessageRecvLoc"
+],
+"PrimaryReceiveLocation": "BatchControlMessageRecvLoc"
+},
+{
+"Name": "INT0001.Agda_Booking",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "Economy",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"INT0001.Agda_Booking"
+],
+"PrimaryReceiveLocation": "INT0001.Agda_Booking"
+},
+{
+"Name": "ZipReceive",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "Itella",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"ZipReceive"
+],
+"PrimaryReceiveLocation": "ZipReceive"
+},
+{
+"Name": "INT0012.Invoice_From_Itella",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "INT0012.Invoice",
+"CustomData": null,
+"InboundTransforms": [
+"INT0012A.Invoice.Processing.Invoice_To_Invoice"
+],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"INT0012.Invoice_From_Itella"
+],
+"PrimaryReceiveLocation": "INT0012.Invoice_From_Itella"
+},
+{
+"Name": "Rcv_TransportOrder",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "CarTransportation",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"Rcv_TransportOrder_FILE"
+],
+"PrimaryReceiveLocation": "Rcv_TransportOrder_FILE"
+},
+{
+"Name": "Rcv_TransportOrderFromAzure",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "CarTransportation",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"Rcv_TransportOrderFromAzure_LogicApp"
+],
+"PrimaryReceiveLocation": "Rcv_TransportOrderFromAzure_LogicApp"
+},
+{
+"Name": "INT0175.SPAR.CustomerInfo",
+"Description": null,
+"IsTwoWay": true,
+"ApplicationName": "INT0175.SPAR",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"INT0175.SPAR.CustomerInfo"
+],
+"PrimaryReceiveLocation": "INT0175.SPAR.CustomerInfo"
+},
+{
+"Name": "INT0175.SPAR.CustomerInfo.FILE",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "INT0175.SPAR",
+"CustomData": null,
+"InboundTransforms": [
+"INT1075A.SPAR.Processes.INT1075A_SPAR_SalesSupport_CustomerInfoRequest_To_SPAR_SPARPersonsokningFraga"
+],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"INT0175.SPAR.CustomerInfo.FILE"
+],
+"PrimaryReceiveLocation": "INT0175.SPAR.CustomerInfo.FILE"
+},
+{
+"Name": "ReceivePort1",
+"Description": null,
+"IsTwoWay": false,
+"ApplicationName": "BizTalk Application 1",
+"CustomData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"ReceiveLocations": [
+"Receive Location1"
+],
+"PrimaryReceiveLocation": "Receive Location1"
+}
+]
+
+Response Code
+
+200
+
+Response Headers
+
+{
+"cache-control": "no-cache",
+"pragma": "no-cache",
+"content-type": "application/json; charset=utf-8",
+"expires": "-1",
+"server": "Microsoft-IIS/10.0",
+"x-aspnet-version": "4.0.30319",
+"persistent-auth": "true",
+"x-powered-by": "ASP.NET",
+"www-authenticate": "Negotiate oRswGaADCgEAoxIEEAEAAAB4S54zL/yHNQAAAAA=",
+"date": "Thu, 13 Jul 2017 18:16:34 GMT",
+"content-length": "4908",
+"": ""
+}
+
+
+
+
+post  /ReceivePorts
+
+Create Receive Port
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+delete  /ReceivePorts/{receivePortName}
+
+Delete Receive port
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get  /ReceivePorts/{receivePortName}
+
+Get Receive Ports
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+put  /ReceivePorts/{receivePortName}
+
+Update Receive port
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Resources
+Show/Hide
+List Operations
+Expand Operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RoleLinks
+Show/Hide
+List Operations
+Expand Operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schemas
+Show/Hide
+List Operations
+Expand Operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SendPortGroups
+Show/Hide
+List Operations
+Expand Operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SendPorts
+Show/Hide
+List Operations
+Expand Operations
+
+
+get  /SendPorts
+
+Get Sendports
+
+
+
+
+Response Class (Status 200)
+
+
+OK
+
+
+
+Model
+Example Value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[
+{
+"Name": "string",
+"Description": "string",
+"ApplicationName": "string",
+"IsDynamic": true,
+"IsTwoWay": true,
+"Status": "string",
+"CustomData": "string",
+"PrimaryTransport": {
+"Address": "string",
+"TransportType": "string",
+"TransportTypeData": "string",
+"SendHandler": "string",
+"RetryCount": 0,
+"RetryInterval": 0,
+"OrderedDelivery": true,
+"Schedule": {
+"ServiceWindowEnabled": true,
+"FromTime": "2017-07-12T08:09:46.397Z",
+"ToTime": "2017-07-12T08:09:46.397Z"
+}
+},
+"SecondaryTransport": {
+"Address": "string",
+"TransportType": "string",
+"TransportTypeData": "string",
+"SendHandler": "string",
+"RetryCount": 0,
+"RetryInterval": 0,
+"OrderedDelivery": true,
+"Schedule": {
+"ServiceWindowEnabled": true,
+"FromTime": "2017-07-12T08:09:46.397Z",
+"ToTime": "2017-07-12T08:09:46.397Z"
+}
+},
+"SendPipeline": "string",
+"SendPipelineData": "string",
+"ReceivePipeline": "string",
+"ReceivePipelineData": "string",
+"InboundTransforms": [
+"string"
+],
+"OutboundTransforms": [
+"string"
+],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": true,
+"AfterSendPipeline": true,
+"BeforeReceivePipeline": true,
+"AfterReceivePipeline": true
+},
+"Property": {
+"BeforeSendPipeline": true,
+"AfterSendPipeline": true,
+"BeforeReceivePipeline": true,
+"AfterReceivePipeline": true
+}
+},
+"EncryptionCert": {
+"CommonName": "string",
+"Thumbprint": "string"
+},
+"Filter": "string",
+"Priority": 0,
+"RouteFailedMessage": true,
+"OrderedDelivery": true,
+"StopSendingOnFailure": true
+}
+]
+
+
+
+
+
+
+Response Content Type application/json text/json application/xml text/xml
+
+
+Hide Response
+
+Curl
+
+curl -X GET --header 'Accept: application/json' 'http://localhost/BizTalkManagementService/SendPorts'
+
+Request URL
+
+http://localhost/BizTalkManagementService/SendPorts
+
+Response Body
+
+[
+{
+"Name": "INT0001.Agresso.Send_Booking",
+"Description": null,
+"ApplicationName": "Economy",
+"IsDynamic": false,
+"IsTwoWay": false,
+"Status": "Bound",
+"CustomData": null,
+"PrimaryTransport": {
+"Address": "C:\\OutZone\\Booking\\%MessageID%-%SourceFileName%",
+"TransportType": "FILE",
+"TransportTypeData": "<CustomProps>
+  <FileName vt="8">%MessageID%-%SourceFileName%</FileName>
+  <CopyMode vt="19">1</CopyMode>
+  <AllowCacheOnWrite vt="11">0</AllowCacheOnWrite>
+  <UseTempFileOnWrite vt="11">0</UseTempFileOnWrite>
+</CustomProps>",
+"SendHandler": "BizTalkServerApplication",
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-09T23:00:00",
+"ToTime": "2017-03-10T22:59:59"
+}
+},
+"SecondaryTransport": {
+"Address": "",
+"TransportType": null,
+"TransportTypeData": null,
+"SendHandler": null,
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-09T23:00:00",
+"ToTime": "2017-03-10T22:59:59"
+}
+},
+"SendPipeline": "Microsoft.BizTalk.DefaultPipelines.PassThruTransmit",
+"SendPipelineData": null,
+"ReceivePipeline": null,
+"ReceivePipelineData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"EncryptionCert": null,
+"Filter": "<?xml version="1.0" encoding="utf-16"?>\r\n<Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  \r\n  <Group>
+    \r\n    <Statement Property="BTS.ReceivePortName" Operator="0" Value="INT0001.Agda_Booking" />\r\n
+  </Group>\r\n
+</Filter>",
+"Priority": 5,
+"RouteFailedMessage": false,
+"OrderedDelivery": false,
+"StopSendingOnFailure": false
+},
+{
+"Name": "ZipFile.Send",
+"Description": null,
+"ApplicationName": "Itella",
+"IsDynamic": false,
+"IsTwoWay": false,
+"Status": "Started",
+"CustomData": null,
+"PrimaryTransport": {
+"Address": "C:\\DropZone\\Invoice\\ItellaDropZone\\%SourceFileName%",
+"TransportType": "FILE",
+"TransportTypeData": "<CustomProps>
+  <FileName vt="8">%SourceFileName%</FileName>
+  <CopyMode vt="19">1</CopyMode>
+  <AllowCacheOnWrite vt="11">0</AllowCacheOnWrite>
+  <UseTempFileOnWrite vt="11">0</UseTempFileOnWrite>
+</CustomProps>",
+"SendHandler": "BizTalkServerApplication",
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-12T23:00:00",
+"ToTime": "2017-03-13T22:59:59"
+}
+},
+"SecondaryTransport": {
+"Address": "",
+"TransportType": null,
+"TransportTypeData": null,
+"SendHandler": null,
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-12T23:00:00",
+"ToTime": "2017-03-13T22:59:59"
+}
+},
+"SendPipeline": "Microsoft.BizTalk.DefaultPipelines.PassThruTransmit",
+"SendPipelineData": null,
+"ReceivePipeline": null,
+"ReceivePipelineData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"EncryptionCert": null,
+"Filter": "",
+"Priority": 5,
+"RouteFailedMessage": false,
+"OrderedDelivery": false,
+"StopSendingOnFailure": false
+},
+{
+"Name": "INT0012.Invoice_To_Eitech",
+"Description": null,
+"ApplicationName": "INT0012.Invoice",
+"IsDynamic": false,
+"IsTwoWay": false,
+"Status": "Started",
+"CustomData": null,
+"PrimaryTransport": {
+"Address": "C:\\DropZone\\Invoice\\%SourceFileName%",
+"TransportType": "FILE",
+"TransportTypeData": "<CustomProps>
+  <FileName vt="8">%SourceFileName%</FileName>
+  <CopyMode vt="19">1</CopyMode>
+  <AllowCacheOnWrite vt="11">0</AllowCacheOnWrite>
+  <UseTempFileOnWrite vt="11">0</UseTempFileOnWrite>
+</CustomProps>",
+"SendHandler": "BizTalkServerApplication",
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-13T23:00:00",
+"ToTime": "2017-03-14T22:59:59"
+}
+},
+"SecondaryTransport": {
+"Address": "",
+"TransportType": null,
+"TransportTypeData": null,
+"SendHandler": null,
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2017-03-13T23:00:00",
+"ToTime": "2017-03-14T22:59:59"
+}
+},
+"SendPipeline": "Microsoft.BizTalk.DefaultPipelines.PassThruTransmit",
+"SendPipelineData": null,
+"ReceivePipeline": null,
+"ReceivePipelineData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"EncryptionCert": null,
+"Filter": "<?xml version="1.0" encoding="utf-16"?>\r\n<Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  \r\n  <Group>
+    \r\n    <Statement Property="BTS.ReceivePortName" Operator="0" Value="INT0012.Invoice_From_Itella" />\r\n
+  </Group>\r\n
+</Filter>",
+"Priority": 5,
+"RouteFailedMessage": false,
+"OrderedDelivery": false,
+"StopSendingOnFailure": false
+},
+{
+"Name": "Snd_TransportOrderToAzure",
+"Description": null,
+"ApplicationName": "CarTransportation",
+"IsDynamic": false,
+"IsTwoWay": false,
+"Status": "Bound",
+"CustomData": null,
+"PrimaryTransport": {
+"Address": "C:\\TransportOrder\\Out\\%MessageID%.ToAzure",
+"TransportType": "FILE",
+"TransportTypeData": "<CustomProps>
+  <FileName vt="8">%MessageID%.ToAzure</FileName>
+  <CopyMode vt="19">1</CopyMode>
+  <AllowCacheOnWrite vt="11">0</AllowCacheOnWrite>
+  <UseTempFileOnWrite vt="11">0</UseTempFileOnWrite>
+</CustomProps>",
+"SendHandler": "BizTalkServerApplication",
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2000-01-01T23:00:00",
+"ToTime": "2000-01-01T22:59:59"
+}
+},
+"SecondaryTransport": {
+"Address": "",
+"TransportType": null,
+"TransportTypeData": null,
+"SendHandler": null,
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2000-01-01T23:00:00",
+"ToTime": "2000-01-01T22:59:59"
+}
+},
+"SendPipeline": "Microsoft.BizTalk.DefaultPipelines.XMLTransmit",
+"SendPipelineData": "<Root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Stages>
+    <Stage CategoryId="9d0e4107-4cce-4536-83fa-4a5040674ad6">
+      <Components>
+        <Component Name="Microsoft.BizTalk.Component.XmlAsmComp">
+          <Properties>
+            <AddXmlDeclaration vt="11">0</AddXmlDeclaration>
+          </Properties>
+        </Component>
+      </Components>
+    </Stage>
+  </Stages>
+</Root>",
+"ReceivePipeline": null,
+"ReceivePipelineData": null,
+"InboundTransforms": [],
+"OutboundTransforms": [],
+"Tracking": {
+"Body": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+},
+"Property": {
+"BeforeSendPipeline": false,
+"AfterSendPipeline": false,
+"BeforeReceivePipeline": false,
+"AfterReceivePipeline": false
+}
+},
+"EncryptionCert": null,
+"Filter": "<?xml version="1.0" encoding="utf-16"?>\n<Filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  \n  <Group>
+    \n    <Statement Property="BTS.ReceivePortName" Operator="0" Value="Rcv_TransportOrder" />\n
+  </Group>\n
+</Filter>",
+"Priority": 5,
+"RouteFailedMessage": false,
+"OrderedDelivery": false,
+"StopSendingOnFailure": false
+},
+{
+"Name": "Snd_TransportOrderJson_FILE",
+"Description": null,
+"ApplicationName": "CarTransportation",
+"IsDynamic": false,
+"IsTwoWay": false,
+"Status": "Stopped",
+"CustomData": null,
+"PrimaryTransport": {
+"Address": "C:\\TransportOrder\\Out\\%MessageID%.json",
+"TransportType": "FILE",
+"TransportTypeData": "<CustomProps>
+  <FileName vt="8">%MessageID%.json</FileName>
+  <CopyMode vt="19">1</CopyMode>
+  <AllowCacheOnWrite vt="11">0</AllowCacheOnWrite>
+  <UseTempFileOnWrite vt="11">0</UseTempFileOnWrite>
+</CustomProps>",
+"SendHandler": "BizTalkServerApplication",
+"RetryCount": 3,
+"RetryInterval": 5,
+"OrderedDelivery": false,
+"Schedule": {
+"ServiceWindowEnabled": false,
+"FromTime": "2000-01-01T23:00:00",
+"ToTime": "2000-01-01T22:59:59"
+}
+},
+"SecondaryTransport": {
+"Address": "",
+"TransportType": null,
+"TransportTypeData": null,
+"SendHandler": null,
+"RetryCount": 3,
+"RetryInterval": 5,
+
+
+
+
+

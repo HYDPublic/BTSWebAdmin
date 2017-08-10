@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
+  <Stages>
+    <Stage CategoryId=\"9d0e4103-4cce-4536-83fa-4a5040674ad6\">
+      <Components>
+        <Component Name=\"INT0012A.Invoice.Pipelinecomponents.UnzipItellaFile\">
+          <Properties>
+            <ArchiveFolder vt=\"8\">ItellaExtracted2</ArchiveFolder>
+          </Properties>
+        </Component>
+      </Components>
+    </Stage>
+  </Stages>
+</Root>",

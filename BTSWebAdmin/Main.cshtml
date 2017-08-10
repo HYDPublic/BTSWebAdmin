@@ -1,0 +1,712 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>BizTalk Web admin</title>
+
+
+    <style class="cp-pen-styles">
+        .flex-box {
+            display: flex;
+            width: 100%;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+            .flex-box .col {
+                text-wrap: none;
+                border: 1px solid green;
+                flex: 0.5;
+                padding: 6px;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                overflow-y: auto;
+                overflow-x: hide;
+            }
+
+        .handle {
+            width: 5px;
+            text-align: center;
+            color: white;
+            transition: all ease-in 0.1s;
+        }
+
+        header {
+            display: flex;
+            min-width: 100vh;
+            /*border:solid 3px black;*/
+        }
+
+            header div {
+                flex: 1;
+            }
+
+        .draggable {
+            background: pink;
+        }
+
+        * {
+            font-family: Arial;
+            font-size: small;
+        }
+
+        .section_header th {
+            background-color: #3399ff;
+            color: white;
+        }
+
+        .handle ~ .col {
+            font-size: 12px;
+            flex-grow: 2.5;
+        }
+
+        .section_columns th {
+            font-size: smaller;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, td, th {
+            border: 1px solid black;
+            text-align: left;
+        }
+
+            table tbody tr td {
+                text-overflow: ellipsis;
+                max-width: 35ch;
+                overflow: hidden;
+                white-space: nowrap;
+                font-size: smaller;
+                height: 16px;
+            }
+
+            table thead tr th {
+                height: 16px;
+            }
+
+        .ports:nth-child(odd) {
+            background-color: azure;
+        }
+
+
+        .ports:nth-child(even) {
+            background-color: white;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="Styles/_styles.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="Styles/sliders.css" media="screen" />
+    <script src="scripts/jquery-3.1.1.js"></script>
+    <script src="scripts/sliders.js"></script>
+    <!--<?xml-stylesheet href="bla.xsl" type="text/xsl" ?>-->
+
+</head>
+<body>
+    <header><div>Main</div><div>Options</div></header>
+    <div class="flex-box">
+        <div class="col" style="white-space: nowrap;">
+            <!--must have width for text-overflow to work-->
+            <ol id="applications">
+                <li class="tree">Applications</li>
+                <!--applications will be added onload, see function get_applications-->
+            </ol>
+        </div>
+        <div class="handle"></div>
+        <div class="col">
+            <table id="sendportsview" class="views" style="display:none">
+                <thead>
+                    <tr class="section_header"><th colspan="8"><span style="float:left;">Send ports</span><span style="float:right;width:150px"> Search</span></th></tr>
+                    <tr class="section_columns"><th colspan="2">Name</th><th>Status</th><th>URI</th><th>Transport</th><th>Handler</th><th>Application</th></tr>
+                </thead>
+                <!--send ports will be added on sendport click-->
+            </table>
+
+            <table id="receiveportsview" class="views" style="display:none">
+                <thead>
+                    <tr class="section_header"><th colspan="8"><span style="float:left;">Receive ports</span><span style="float:right;width:150px"> Search</span></th></tr>
+                    <tr class="section_columns"><th colspan="2">Name</th><th>Status</th><th>URI</th><th>Transport</th><th>Handler</th><th>Application</th></tr>
+                </thead>
+                <!--receive ports will be added on receive click-->
+            </table>
+
+            <table id="orchestrationsview" class="views" style="display:none">
+                <thead>
+                    <tr class="section_header"><th colspan="7"><span style="float:left;">Orchestrations</span><span style="float:right;width:150px"> Search</span></th></tr>
+                    <tr class="section_columns"><th colspan="2">Name</th><th>Status</th><th>Host</th><th>Assembly</th><th>Application</th></tr>
+                </thead>
+                <!--receive ports will be added on receive click-->
+            </table>
+
+            <table id="sendportgroupsview" class="views" style="display:none">
+                <thead>
+                    <tr class="section_header"><th colspan="4"><span style="float:left;">Send port groups</span><span style="float:right;width:150px"> Search</span></th></tr>
+                    <tr class="section_columns"><th colspan="2">Name</th><th>Status</th><th>Application</th></tr>
+                </thead>
+                <!--send ports will be added on sendport click-->
+            </table>
+
+            <table id="pipelinesview" class="views" style="display:none">
+                <thead>
+                    <tr class="section_header"><th colspan="5"><span style="float:left;">Pipelines</span><span style="float:right;width:150px"> Search</span></th></tr>
+                    <tr class="section_columns"><th colspan="2">Name</th><th>Assembly</th><th>Type</th><th>Application</th></tr>
+                </thead>
+                <!--send ports will be added on sendport click-->
+            </table>
+            <!--
+            <form>
+                <input type="range" min="1" max="3" step="1" onchange="updateSlider(this);" onmouseup="updateStatus(this);"/>
+                 <input type="range" min="1" max="2" step="1" onchange="updateSlider(this);" onmouseup="updateStatus(this);"/>
+            </form>
+            -->
+
+
+
+        </div>
+
+    </div>
+    <script src="scripts/splitter.js"></script>
+    <script src="scripts/global.js"></script>
+    <script>
+
+
+    //document).ready(
+   $(function () {
+
+       BtsGet(get_applications, "Applications", null);
+
+   }
+
+
+   );
+
+
+
+
+
+function BtsGet(callback,query,param)
+    {
+
+
+    //cross-domain-issue? only works in IE. maybe security issue? aut issue
+    var URL = "http://localhost/BizTalkManagementService/";
+
+
+
+    $.ajax({
+        url:URL + query,
+        type: "GET",
+        success: function (xml)
+        { callback(xml,param, query);
+        },
+        error:function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            alert(textStatus);
+            alert(jqXHR.responseText);
+
+        }
+
+    })
+
+
+    /*
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", URL + query, true);//false
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    //  xmlhttp.withCredentials = true;
+    //xmlhttp.setRequestHeader('Authorization', 'Basic ' + window.btoa('apiusername:apiuserpassword')); //in prod, you should encrypt user name and password and provide encrypted keys here instead
+    xmlhttp.onload = function (e) {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+                callback(xmlhttp,param,query);
+            } else {
+                alert("Could not get " + url + query);
+            }
+        }
+    };
+    xmlhttp.onerror = function (e) {
+        alert(xmlhttp.statusText);
+    };
+    xmlhttp.send(null);//ItemJSON
+   */
+
+
+
+}
+
+function get_applications(applications,param)
+{
+
+   /*
+   <li>
+       <input type="checkbox" id="subfolder1" />
+       <label for="subfolder1" id="lbl">INT001.Invoice</label>
+       <ol>
+           <li class="leaf"><span ><img src="Images/img_trans.gif" style="background: url(Images/vert-bts-resources.gif) 0 -54px"/>&nbsp;Send ports</span></li>
+            <li class="leaf"><img src="Images/img_trans.gif" style="background: url(Images/vert-bts-resources.gif) 0 -72px"/>&nbsp;Receive ports</li>
+       </ol>
+   </li>
+   */
+   // var applications = JSON.parse(xmlhttp.responseText);
+
+    var apps = document.getElementById("applications");
+
+
+    for (var i = 0; i < applications.length; i++) {
+        var li_parent = document.createElement("LI");
+
+        var input = document.createElement("INPUT");
+        input.type = "checkbox";
+        input.id = "section" + i.toString();
+
+        li_parent.appendChild(input);
+
+        var label = document.createElement("LABEL");
+        label.htmlFor = input.id;
+        label.innerText = applications[i].Name;
+
+
+        li_parent.appendChild(label);
+
+        addSections(li_parent, label.innerText);
+        apps.appendChild(li_parent);
+    }
+
+}
+
+
+function hideviews() {
+    var views = document.getElementsByClassName("views")
+
+    for (var i = 0; i < views.length; i++) {
+        views[i].style.display = "none";
+    }
+}
+function load_receiveports(app)
+{
+
+
+
+    if (!(receiveports && receivelocations && transforms)) {
+        /*
+        BtsGet(function (xmlhttp, param) {
+            receivelocations = JSON.parse(xmlhttp.responseText);
+        }, "ReceiveLocations", app);
+        */
+        // BtsGet(get_receivelocations, "ReceiveLocations", app);
+        var get_receiveport_data = function (xmlhttp, app, query) {
+            if (query == "ReceiveLocations")
+                // receivelocations = JSON.parse(xmlhttp.responseText);
+                receivelocations = xmlhttp;
+            if (query == "ReceivePorts")
+                receiveports = xmlhttp;
+
+            if (query == "Transforms")
+                transforms = xmlhttp;
+
+
+            if (!receivelocations) {
+                BtsGet(get_receiveport_data, "ReceiveLocations", app);
+            }
+            else if (!receiveports) {
+                BtsGet(get_receiveport_data, "ReceivePorts", app);
+            }
+            else if (!transforms) {
+                BtsGet(get_receiveport_data, "Transforms", app);
+            }
+            else {
+                load_receiveports(app)
+            }
+        }
+
+        get_receiveport_data(null,app);
+
+    }
+    else {
+
+        hideviews();
+
+        var receiveportsview = document.getElementById("receiveportsview");
+
+        var ports = receiveportsview.getElementsByTagName("tbody");
+
+        var len = ports.length;
+
+        for (var i = 0; i < len; i++) {
+            receiveportsview.removeChild(ports[0]);
+        }
+
+        ports = receiveportsview.getElementsByTagName("tbody")
+
+        for (var i = 0; i < ports.length; i++) {
+            receiveportsview.removeChild(ports[0]);//array will get smaller and smaller, always remove the "first" one
+        }
+
+
+        for (var i = 0; i < receiveports.length; i++) {
+            if (receiveports[i].ApplicationName == app) {
+
+
+                var receiveportsview_body = document.createElement("tbody");
+                receiveportsview_body.className = "ports";
+
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                td.colSpan = "7";//3 buttons checkboxes to show/hide locations or maps
+                td.innerText = receiveports[i].Name;
+
+                tr.appendChild(td);
+                receiveportsview_body.appendChild(tr);
+
+                //Name only for maps, tooltip with source and target
+                for (var x = 0; x < receivelocations.length; x++) {
+                    if(receiveports[i].Name == receivelocations[x].ReceivePortName)
+                    {
+                        var tr = document.createElement("tr");
+                        var td_values = [receivelocations[x].Name,
+                           receivelocations[x].Enable,
+                            receivelocations[x].Address,
+                            receivelocations[x].TransportType,
+                            receivelocations[x].ReceiveHandler,
+                         receiveports[i].ApplicationName];
+                        var tds = "<td style='border-right-style:hidden;width:16px'><img src='Images/img_trans.gif' style='background: url(Images/vert-bts-resources.gif) 0 -90px'/></td>"
+                        tds += "<td style='border-left-style:hidden'>" + td_values.join("</td><td>") + "</td>";
+
+                        //add sub-row with pipeline
+                            tr.innerHTML = tds;
+                            receiveportsview_body.appendChild(tr);
+
+                            var pipeline_tr = document.createElement("tr");
+                        //.pipeline_data:after content ":"
+                       var pipeline_tds = format("<td colspan='3' style='text-align:right;border-right:none'>Pipeline</td><td colspan='4' style='text-align:right;border-left:none'>{0}</td>", receivelocations[x].ReceivePipeline);
+
+                        window.Active
+                       if (receivelocations[x].ReceivePipelineData)
+                       {
+                           var xslt = new ActiveXObject("Msxml2.XSLTemplate");
+                           var xslDoc = new ActiveXObject("Msxml2.FreeThreadedDOMDocument");
+                           xslDoc.loadXML(receivelocations[x].ReceivePipelineData);
+                           xslt.stylesheet = xslDoc;
+                           var xslProc = xslt.createProcessor();
+                           xslProc.input = xmlDoc;
+                           xslProc.transform();
+                           return xslProc.output;
+                       }
+
+
+                       pipeline_tr.innerHTML = pipeline_tds;
+                       receiveportsview_body.appendChild(pipeline_tr);
+
+                        //if not null create ReceivePipelineData section
+                        /*
+                       "ReceivePipelineData": "<Root xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><Stages><Stage CategoryId=\"9d0e4105-4cce-4536-83fa-4a5040674ad6\"><Components><Component Name=\"Microsoft.BizTalk.Component.XmlDasmComp\"><Properties><ValidateDocument vt=\"11\">-1</ValidateDocument></Properties></Component></Components></Stage><Stage CategoryId=\"9d0e410e-4cce-4536-83fa-4a5040674ad6\"><Components><Component Name=\"Microsoft.BizTalk.Component.PartyRes\"><Properties /></Component></Components></Stage></Stages></Root>",
+                       */
+                    }
+
+                }
+
+                receiveportsview.appendChild(receiveportsview_body);
+            }
+        }
+
+
+
+
+        receiveportsview.style.display = "";
+
+
+
+    }
+}
+
+
+
+function get_receivelocations(xml, app) {
+
+    receivelocations = xml;//;JSON.parse(xmlhttp.responseText);
+
+    BtsGet(get_receiveports, "ReceivePorts", app);
+
+}
+function get_receiveports(xml, param) {
+    receiveports = xml;// JSON.parse(xmlhttp.responseText);
+
+    load_receiveports(param);
+}
+
+function load_pipelines(app)
+{
+    hideviews();
+
+    if (!pipelines) {
+        BtsGet(function (xmlhttp, param) {
+            pipelines = xmlhttp;//JSON.parse(xmlhttp.responseText);
+
+            load_pipelines(param);
+        }, "Pipelines", app);
+    }
+    else {
+        var pipelinesview = document.getElementById("pipelinesview");
+        var pipelinesview_body = pipelinesview.getElementsByTagName('tbody')[0];
+
+        if (pipelinesview_body) {
+            pipelinesview.removeChild(pipelinesview_body);
+        }
+
+        pipelinesview_body = document.createElement("tbody");
+
+
+        for (var i = 0; i < pipelines.length; i++) {
+            if (pipelines[i].Application == app) {
+
+
+
+                var tr = document.createElement("tr");
+                var td_values = ["", pipelines[i].FullName,
+                    pipelines[i].AssemblyQualifiedName,
+                     pipelines[i].Type,
+                 pipelines[i].Application];
+                var tds = "<td>" + td_values.join("</td><td>") + "</td>";
+
+
+                tr.innerHTML = tds;
+                pipelinesview_body.appendChild(tr);
+
+            }
+        }
+
+        pipelinesview.appendChild(pipelinesview_body);
+        pipelinesview.style.display = "";
+
+
+    }
+
+
+}
+
+function load_sendportgroups(app)
+{
+    hideviews();
+
+    if (!sendportgroups) {
+        BtsGet(function (xmlhttp, param) {
+            sendportgroups = xmlhttp;// JSON.parse(xmlhttp);//xmlhttp.responseText
+
+            load_sendportgroups(param);
+        }, "SendPortGroups", app);
+    }
+    else {
+        var sendportgroupsview = document.getElementById("sendportgroupsview");
+        var sendportgroupsview_body = sendportgroupsview.getElementsByTagName('tbody')[0];
+
+        if (sendportgroupsview_body) {
+            sendportgroupsview.removeChild(sendportgroupsview_body);
+        }
+
+        sendportgroupsview_body = document.createElement("tbody");
+
+
+        for (var i = 0; i < sendportgroups.length; i++) {
+            if (sendportgroups[i].ApplicationName == app) {
+
+
+
+                var tr = document.createElement("tr");
+                var td_values = ["", sendportgroups[i].Name,
+                    sendportgroups[i].Status,
+                 sendportgroups[i].ApplicationName];
+                var tds = "<td>" + td_values.join("</td><td>") + "</td>";
+
+
+                tr.innerHTML = tds;
+                sendportgroupsview_body.appendChild(tr);
+
+            }
+        }
+
+        sendportgroupsview.appendChild(sendportgroupsview_body);
+        sendportgroupsview.style.display = "";
+
+
+    }
+}
+
+function load_orchestrations(app)
+{
+    hideviews();
+
+    if (!orchestrations) {
+        BtsGet(get_orchestrations, "Orchestrations", app);
+    }
+    else {
+        var orchestrationsview = document.getElementById("orchestrationsview");
+        var orchestrationsview_body = orchestrationsview.getElementsByTagName('tbody')[0];
+
+        if (orchestrationsview_body) {
+            document.getElementById("orchestrationsview").removeChild(orchestrationsview_body);
+        }
+
+        orchestrationsview_body = document.createElement("tbody");
+
+
+        for (var i = 0; i < orchestrations.length; i++) {
+            if (orchestrations[i].ApplicationName == app) {
+
+
+                var name = orchestrations[i].FullName;
+                name = name.substr(name.lastIndexOf(".") + 1);
+                var tr = document.createElement("tr");
+                var td_values = ["", name,
+                    orchestrations[i].Status,
+                    orchestrations[i].Host,
+                    orchestrations[i].AssemblyName,
+                 orchestrations[i].ApplicationName];
+                var tds = "<td>" + td_values.join("</td><td>") + "</td>";
+
+
+                tr.innerHTML = tds;
+                orchestrationsview_body.appendChild(tr);
+
+            }
+        }
+
+        orchestrationsview.appendChild(orchestrationsview_body);
+        orchestrationsview.style.display = "";
+
+
+    }
+
+
+}
+
+function load_sendports(app)
+{
+    hideviews();
+
+    if (!sendports) {
+        BtsGet(get_sendports, "SendPorts", app);
+    }
+    else {
+        var sendportsview = document.getElementById("sendportsview");
+        var sendportsview_body = sendportsview.getElementsByTagName('tbody')[0];
+
+        if (sendportsview_body)
+        {
+            document.getElementById("sendportsview").removeChild(sendportsview_body);
+        }
+
+        sendportsview_body = document.createElement("tbody");
+
+
+        for (var i = 0; i < sendports.length; i++) {
+            if (sendports[i].ApplicationName == app) {
+
+
+
+                var tr = document.createElement("tr");
+                var td_values = ["",sendports[i].Name,
+                    sendports[i].Status,
+                    sendports[i].PrimaryTransport.Address,
+                    sendports[i].PrimaryTransport.TransportType,
+                    sendports[i].PrimaryTransport.SendHandler,
+                 sendports[i].ApplicationName];
+                    var tds = "<td>" + td_values.join("</td><td>") + "</td>";
+
+
+                tr.innerHTML = tds;
+                sendportsview_body.appendChild(tr);
+
+            }
+        }
+
+        sendportsview.appendChild(sendportsview_body);
+        sendportsview.style.display = "";
+
+
+    }
+    //Get all sendports and filter when displaying
+    //called from label, check this.innerText
+
+}
+
+function get_orchestrations(xmlhttp, param) {
+    orchestrations = xmlhttp;//JSON.parse(xmlhttp);//.responseText
+
+    load_orchestrations(param);
+}
+
+function get_sendports(xmlhttp,param)
+{
+    sendports = xmlhttp;//JSON.parse(xmlhttp);//.responseText
+
+    load_sendports(param);
+}
+
+function addSections(li_parent,app)
+{
+    var sections = [{
+        "name": "Send port groups", "img_index": "-36px", "func": function () {
+            load_sendportgroups(app);
+        }
+    }, {
+        "name": "Orchestrations", "img_index": "0px", "func": function () {
+            load_orchestrations(app);
+        }
+    }, {
+        "name": "Send ports", "img_index": "-54px", "func": function () {
+            load_sendports(app);
+        }
+    },
+        {
+            "name": "Receive ports", "img_index": "-72px", "func": function () {
+                load_receiveports(app);
+            }
+        },
+        {
+            "name": "Pipelines", "img_index": "-162px", "func": function () {
+                load_pipelines(app);
+            }
+        }];
+
+
+
+    var ol_parent = document.createElement("OL");
+
+    for (var i = 0; i < sections.length; i++) {
+        var section = sections[i];
+
+
+        var li = document.createElement("LI");
+        li.className = "leaf";
+        li.addEventListener("click",section.func, false);
+
+
+        var img = document.createElement("IMG");
+        img.src = "Images/img_trans.gif";
+        img.style.backgroundImage = "url(Images/vert-bts-resources.gif)";
+        img.style.backgroundPositionX = "0px";
+        img.style.backgroundPositionY = section.img_index;
+
+
+        li.appendChild(img);
+
+        var t = document.createTextNode(" " + section.name);
+
+        li.appendChild(t);
+
+        ol_parent.appendChild(li);
+
+
+    }
+
+    li_parent.appendChild(ol_parent);
+
+}
+    </script>
+</body>
+</html>

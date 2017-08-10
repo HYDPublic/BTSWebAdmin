@@ -1,0 +1,72 @@
+﻿/*
+    green:#00cc00
+red:#ff3300
+orange:middle #ff9900
+*/
+.statebutton-min::-ms-fill-upper{
+    background-color:green
+}
+
+.statebutton-min::-ms-fill-lower{
+     background-color:green
+}
+
+.statebutton-mid::-ms-fill-upper{
+    background-color:blue
+}
+
+.statebutton-mid::-ms-fill-lower{
+     background-color:blue
+}
+
+.statebutton-max::-ms-fill-upper{
+    background-color:red
+}
+
+.statebutton-max::-ms-fill-lower{
+     background-color:red
+}
+
+input[type=range]::-ms-track {
+  width: 48px;
+  height: 16px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-tooltip {
+    display: none;
+}
+
+input[type=range] {
+
+  height: 18px;
+  width: 50px;
+  cursor: pointer;
+}
+
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 0.8px solid black;
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  background-color:silver;
+}
+input[type=range]::-ms-fill-upper {
+  
+  border: 0.2px solid black;
+  border-radius: 32px;
+  box-shadow: 1px 1px 1px #000000, 1px 1px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-lower {
+  
+  border: 0.2px solid black;
+  border-radius: 32px;
+  
+  box-shadow: 1px 1px 1px #000000, 1px 1px 1px #0d0d0d;
+}
+
+
+

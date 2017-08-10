@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+</head>
+<body>
+
+    <div>
+        <h2>Search by assembly</h2>
+        <input type="text" id="ass" size="30" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="product" />
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+    var uri = 'api/pipelines';
+
+    //Microsoft.BizTalk.Component.PartyRes,Microsoft.BizTalk.Pipeline.Components,Version=3.0.1.0,Culture=neutral,PublicKeyToken=31bf3856ad364e35
+
+    
+
+    function find() {
+      var id = $('#ass').val();
+        $.getJSON(uri + '/' + id + '/')
+          .done(function (stages) {
+            alert(stages.Stages.length);
+          })
+          .fail(function (jqXHR, textStatus, err) {
+              alert('Error: ' + err);
+          });
+    }
+    </script>
+</body>
+</html>
