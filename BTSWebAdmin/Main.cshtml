@@ -385,7 +385,8 @@ function load_receiveports(app)
                         //.pipeline_data:after content ":"
                        var pipeline_tds = format("<td colspan='3' style='text-align:right;border-right:none'>Pipeline</td><td colspan='4' style='text-align:right;border-left:none'>{0}</td>", receivelocations[x].ReceivePipeline);
 
-                        window.Active
+                        /*
+                        working on this
                        if (receivelocations[x].ReceivePipelineData)
                        {
                            var xslt = new ActiveXObject("Msxml2.XSLTemplate");
@@ -397,7 +398,8 @@ function load_receiveports(app)
                            xslProc.transform();
                            return xslProc.output;
                        }
-
+                       */
+                       
 
                        pipeline_tr.innerHTML = pipeline_tds;
                        receiveportsview_body.appendChild(pipeline_tr);
